@@ -16,6 +16,8 @@ const oroTexto = document.querySelector("#oroTexto");
 const estadísticasMonstruo = document.querySelector("#estadísticasMonstruo");
 const nombreMonstruo = document.querySelector("#nombreMonstruo");
 const saludMonstruoTexto = document.querySelector("#saludMonstruo");
+const imagen = document.querySelector("#imagen"); // Agregamos la referencia al elemento de imagen
+
 const armas = [
   { name: 'palo', power: 5 },
   { name: 'daga', power: 30 },
@@ -24,69 +26,80 @@ const armas = [
 ];
 const monstruos = [
   {
-    name: "baba",
+    name: "araña",
     level: 2,
-    health: 15
+    health: 15,
+    img: "img/araña.png" // Agrega la imagen 
   },
   {
     name: "bestia colmilluda",
     level: 8,
-    health: 60
+    health: 60,
+    img: "img/bestia.png" // Agrega la imagen 
   },
   {
     name: "dragón",
     level: 20,
-    health: 300
+    health: 300,
+    img: "img/dragon.jpg" // Agrega la imagen 
   }
-]
+];
 const ubicaciones = [
   {
     name: "plaza del pueblo",
     "button text": ["Ir a la tienda", "Ir a la cueva", "Luchar contra el dragón"],
     "button functions": [irTienda, irCueva, lucharDragon],
-    text: "Estás en la plaza del pueblo. Ves un cartel que dice \"Tienda\"."
+    text: "Estás en la plaza del pueblo. Ves un cartel que dice \"Tienda\".",
+    img: "img/plaza1..jpg"// Agrega la imagen 
   },
   {
     name: "tienda",
     "button text": ["Comprar 10 salud (10 oro)", "Comprar arma (30 oro)", "Ir a la plaza del pueblo"],
     "button functions": [comprarSalud, comprarArma, irPlaza],
-    text: "Entras en la tienda."
+    text: "Entras en la tienda.",
+    img: "img/tienda.jpg"// Agrega la imagen 
   },
   {
     name: "cueva",
     "button text": ["Luchar contra baba", "Luchar contra bestia colmilluda", "Ir a la plaza del pueblo"],
     "button functions": [lucharBaba, lucharBestia, irPlaza],
-    text: "Entras en la cueva. Ves algunos monstruos."
+    text: "Entras en la cueva. Ves algunos monstruos.",
+    img: "img/cueva..jpg"// Agrega la imagen 
   },
   {
     name: "lucha",
     "button text": ["Atacar", "Esquivar", "Correr"],
     "button functions": [atacar, esquivar, irPlaza],
-    text: "Estás luchando contra un monstruo."
+    text: "Estás luchando contra un monstruo.",
+    img: ""// Agrega la imagen 
   },
  {
     name: "matar monstruo",
     "button text": ["Ir a la plaza del pueblo", "Ir a la plaza del pueblo", "Ir a la plaza del pueblo"],
     "button functions": [irPlaza, irPlaza, huevoPascua],
-    text: 'El monstruo grita "¡Arg!" mientras muere. Ganas puntos de experiencia y encuentras oro.'
+    text: 'El monstruo grita "¡Arg!" mientras muere. Ganas puntos de experiencia y encuentras oro.',
+    img: "img/cueva..jpg"// Agrega la imagen 
   },
 {
     name: "perder",
     "button text": ["¿JUGAR DE NUEVO?", "¿JUGAR DE NUEVO?", "¿JUGAR DE NUEVO?"],
     "button functions": [reiniciar, reiniciar, reiniciar],
-    text: "Mueres. &#x2620;"
+    text: "Mueres. &#x2620;",
+    img: "img/gameover.png"// Agrega la imagen 
   },
   { 
     name: "ganar", 
     "button text": ["¿JUGAR DE NUEVO?", "¿JUGAR DE NUEVO?", "¿JUGAR DE NUEVO?"], 
     "button functions": [reiniciar, reiniciar, reiniciar], 
-    text: "¡Derrotas al dragón! ¡GANASTE EL JUEGO! &#x1F389;" 
+    text: "¡Derrotas al dragón! ¡GANASTE EL JUEGO! &#x1F389;" ,
+    img: "img/victoria.jpg"// Agrega la imagen 
   },
   {
     name: "huevo de pascua",
     "button text": ["2", "8", "¿Ir a la plaza del pueblo?"],
     "button functions": [elegirDos, elegirOcho, irPlaza],
-    text: "Encuentras un juego secreto. Elige un número de arriba. Se elegirán diez números al azar entre 0 y 10. ¡Si el número que eliges coincide con uno de los números aleatorios, ganas!"
+    text: "Encuentras un juego secreto. Elige un número de arriba. Se elegirán diez números al azar entre 0 y 10. ¡Si el número que eliges coincide con uno de los números aleatorios, ganas!",
+    img: ""// Agrega la imagen 
   }
 ];
 
@@ -104,6 +117,13 @@ function actualizar(ubicacion) {
   boton2.onclick = ubicacion["button functions"][1];
   boton3.onclick = ubicacion["button functions"][2];
   texto.innerHTML = ubicacion.text;
+
+  // Establece la imagen de fondo según la ubicación o el monstruo actual
+  if (ubicacion.img) {
+    imagen.style.backgroundImage = `url(${ubicacion.img})`;
+  } else if (luchando !== undefined) {
+    imagen.style.backgroundImage = `url(${monstruos[luchando].img})`;
+  }
 }
 
 function irPlaza() {
