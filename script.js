@@ -1,3 +1,32 @@
+document.addEventListener("DOMContentLoaded", function() {
+  var intro1 = document.getElementById('intro1');
+  var intro2 = document.getElementById('intro2');
+  var intro3 = document.getElementById('intro3');
+  var mainContent = document.getElementById('main-content');
+
+  // Mostrar la primera introducción
+  intro1.style.display = 'block';
+
+  // Desvanecer la primera introducción y mostrar la segunda después de 5 segundos
+  setTimeout(function() {
+    intro1.style.display = 'none';
+    intro2.style.display = 'block';
+
+    // Desvanecer la segunda introducción y mostrar la tercera después de 5 segundos
+    setTimeout(function() {
+      intro2.style.display = 'none';
+      intro3.style.display = 'block';
+
+      // Desvanecer la tercera introducción y mostrar el contenido principal después de 5 segundos adicionales
+      setTimeout(function() {
+        intro3.style.display = 'none';
+        mainContent.style.display = 'block';
+      }, 5000); // 5000 milisegundos = 5 segundos para la tercera intro
+    }, 5000); // 5000 milisegundos = 5 segundos para la segunda intro
+  }, 5000); // 5000 milisegundos = 5 segundos para la primera intro
+});
+
+
 let xp = 0;
 let salud = 100;
 let oro = 50;

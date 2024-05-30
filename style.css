@@ -1,3 +1,18 @@
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  background-color: #ffffff;
+}
+
+.intro img {
+  max-width: 1300px; /* Para asegurarse de que la imagen no se desborde de la pantalla */
+  display: block; /* Hacer que la imagen sea un elemento de bloque */
+  margin: auto; /* Centrar la imagen horizontalmente */
+}
+
+
 body {
     background-color: #0a0a23;
   }
